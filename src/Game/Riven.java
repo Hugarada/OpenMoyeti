@@ -16,14 +16,10 @@ import java.awt.Point;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-import java.io.File;
-import java.io.IOException;
-
 import javax.swing.Timer;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 
 public class Riven extends JPanel implements ActionListener, MouseMotionListener
@@ -35,7 +31,7 @@ public class Riven extends JPanel implements ActionListener, MouseMotionListener
     private Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); //Get screen resolution
     private Image C_Image;
     private JLabel mouseX, mouseY;
-	private JLabel THitboxes;
+	private JLabel[] THitboxes;
     private final int DELAY = 16;
     private Timer timer;
     private int x, y;
@@ -74,21 +70,25 @@ public class Riven extends JPanel implements ActionListener, MouseMotionListener
         mouseX.setVisible(false);
 
         mouseY.setBounds(mouseX.getX(), mouseX.getY() + mouseX.HEIGHT + 20, 100, 20);
-        mouseY.setVisible(true);//Label settings
+        mouseY.setVisible(false);//Label settings
 
         add(mouseX);
         add(mouseY);//add mouse coordinate givers
 
-        timer = new Timer(DELAY, this);
+        //Set Menu
+		MC = new MandC();
+        THitboxes = MC.hitChange(0, size, true);
+        
+        for (int i = 0; i < THitboxes.length; i++) //add menu boxes
+            add(THitboxes[i]);
+
+        timer = new Timer(DELAY, this); //Makes the program refresh 17 times per second
         timer.start();
 		
 		//Play Menu
 		se = new soundEngine(); //Importing the sound engine
         se.setFile(0);
         se.play();
-		
-		//Set Menu
-		MC = new MandC();
     }
 
     private void loadImage()
@@ -112,20 +112,27 @@ public class Riven extends JPanel implements ActionListener, MouseMotionListener
 
         if (kb.getDBG()) //If the debug is set to ON
         {
-            //set shape color
-            g2d.setPaint(Color.black);
+            changeDBG(g2d, Color.black);
 
-            //drawing the rectangle
-            g2d.fillRect(0, 0, 105, 60);
             mouseX.setVisible(true);
             mouseY.setVisible(true);
         }
         else
         {
-            g2d.dispose();
+            changeDBG(g2d, new Color(0, 0, 0, 255));
             mouseX.setVisible(false);
             mouseY.setVisible(false);
         }
+    }
+
+    private void changeDBG(Graphics2D g2d, Color color) //this function will change the color to show the debug
+    {
+        //set shape color
+        g2d.clearRect(0, 0, 105, 60);
+        g2d.setPaint(color);
+
+        //drawing the rectangle
+        g2d.fillRect(0, 0, 105, 60);
     }
 
     private void labChange()

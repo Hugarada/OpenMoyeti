@@ -1,0 +1,9 @@
+#ignore Frames due to copyright
+##ignore .png images
+*.png
+
+##Ignore music files
+*.wav
+
+##Ignore video files
+*.mp4

@@ -8,10 +8,28 @@ import java.awt.Dimension;
 
 public class MandC
 {
-	
-	public JLabel[] setMenu(Dimension size)
+	public JLabel[] hitChange(int i, Dimension size, boolean supret) //the boolean "supret" is supposed to define where the users wants to actually change the existing texts and hitboxes or not
 	{
-		JLabel[] GText = new JLabel[3];
+		JLabel[] label;
+		switch (i)
+		{
+			case 0:
+				label = setMenu(size);
+				break;
+			default:
+				label = null;
+				break;
+		}
+		if (supret == false) //in case the user didn't desired to change the existing labels
+			return null;
+		else
+			return label;
+	}
+
+
+	private JLabel[] setMenu(Dimension size)
+	{
+		JLabel[] GText = new JLabel[4];
 		
 		int w, h;
 		//Getting menu values
@@ -36,18 +54,18 @@ public class MandC
 		GText[1] = new JLabel("Load new Game");
 		GText[2] = new JLabel("Credits");
 		GText[3] = new JLabel("Exit Game");
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i <= 3; i++)
 		{
 			GText[i].setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 16));
 			GText[i].setOpaque(false);
 			GText[i].setForeground(Color.white);
 			if (i == 0)
-				GText[i].setBounds(w, h, 100, 20);
+				GText[i].setBounds(w, h, 500, 20);
 			else
-				GText[i].setBounds(GText[i - 1].getX(), GText[i - 1].getY() + 30, 100, 20);
+				GText[i].setBounds(w, GText[i - 1].getY() + 30, 500, 20);
 			GText[i].setVisible(true);
 		}
-		
+
 		return GText;
 	}
 }
