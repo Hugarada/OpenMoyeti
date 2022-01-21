@@ -104,6 +104,7 @@ public class Riven extends JPanel implements ActionListener, MouseMotionListener
     {
         g.drawImage(C_Image, 0, 0, null); //Draw the front frame
         paintDBG(g);
+	MC.createHitBoxes(g, C_ImageID);
     }
 
     private void paintDBG(Graphics g)
