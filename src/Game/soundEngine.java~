@@ -8,12 +8,11 @@ import javax.sound.sampled.AudioSystem;
 public class soundEngine
 {
 	Clip clip;
-	File file[] = new File[2];
+	File file[] = new File[1];
 	
 	public soundEngine()
 	{
 		file[0] = new File("../OST/0.wav");
-		file[1] = new File("../OST/1.wav");
 	}
 	
 	public void setFile(int i)

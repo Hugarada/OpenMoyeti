@@ -7,7 +7,3 @@
 
 ##Ignore video files
 *.mp4
-
-##ignore unecessary VIM backup files
-*.un~
-.java~
