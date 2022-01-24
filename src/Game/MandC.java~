@@ -81,6 +81,11 @@ public class MandC
 		return GText;
 	}
 
+	public int[] setHitBoxes(int C_ImageID)
+	{
+		int[] = hitX, hitY;
+	}
+
 	public void createHitBoxes(Graphics g, int C_ImageID)
 	{
 		Graphics2D g2d = (Graphics2D) g;
@@ -110,8 +115,8 @@ public class MandC
 		}	
 	}
 
-	public void mousePointer(MouseEvent e)
+	public void mouseEntered(MouseEvent e)
 	{
-	
+		if ()
 	}
 }

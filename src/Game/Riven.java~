@@ -35,6 +35,7 @@ public class Riven extends JPanel implements ActionListener, MouseMotionListener
     private final int DELAY = 16;
     private Timer timer;
     private int x, y;
+    private int[] hitX, hitY;
 
     public Riven()
     {
@@ -158,8 +159,11 @@ public class Riven extends JPanel implements ActionListener, MouseMotionListener
     {
         x = e.getX();
         y = e.getY();
+    }
 
-	MC.mousePointer(e); //This is in case the rectangles are pointed, something might occur
+    public void mouseEntered(MouseEvent e)
+    {
+    	MC.mousePointer(e); //This is in case the rectangles are pointed, something might occur
     }
     
     //Key Bindings

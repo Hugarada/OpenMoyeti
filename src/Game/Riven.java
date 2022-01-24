@@ -160,11 +160,6 @@ public class Riven extends JPanel implements ActionListener, MouseMotionListener
         x = e.getX();
         y = e.getY();
     }
-
-    public void mouseEntered(MouseEvent e)
-    {
-    	MC.mousePointer(e); //This is in case the rectangles are pointed, something might occur
-    }
     
     //Key Bindings
     private class TAdapter extends KeyAdapter

@@ -115,8 +115,22 @@ public class MandC
 		}	
 	}
 
-	public void mouseEntered(MouseEvent e)
+	public int[] mousePointer(MouseEvent e, int C_ImageID)
 	{
-		if ()
+		int areturn[2]; //array to return
+
+		areturn[0] = C_ImageID;
+		switch(C_ImageID)
+		{
+			case 0:
+				int[] mouseAvail[4]; //set available positions
+
+				boolean returned = false; //check if it is inside of a hitbox
+				for (int i = 0; i<= 3; i++)
+				{
+					mouseAvail[i] = h + (30 * i);
+					if (e.getX() >= w && e.getX() <= width && e.getY() >= mouseAvail[i] && e.getY() <= mouseAvail[i] + 30);
+				}
+		}
 	}
 }
