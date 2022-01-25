@@ -13,9 +13,11 @@ import java.awt.event.MouseEvent;
 
 public class MandC
 {
-	int height = 25;
-	int width = 250;
-	int w, h;
+	private int height = 30;
+	private int width = 250;
+	private int w, h;
+	private int sep = 15;
+	private int oSelected, areturn = 0; //Value 0: not triggered. Value 1: Triggered. Value 2: Trigger block
 
 	public JLabel[] hitChange(int i, Dimension size, boolean supret) //the boolean "supret" is supposed to define where the users wants to actually change the existing texts and hitboxes or not
 	{
@@ -74,63 +76,48 @@ public class MandC
 			if (i == 0)
 				GText[i].setBounds(w, h, width, height);
 			else
-				GText[i].setBounds(w, GText[i - 1].getY() + 30, width, height);
+				GText[i].setBounds(w, GText[i - 1].getY() + height + sep, width, height);
 			GText[i].setVisible(true);
 		}
 
 		return GText;
 	}
 
-	public int[] setHitBoxes(int C_ImageID)
+	public int mousePointer_sound(MouseEvent e, int C_ImageID)
 	{
-		int[] = hitX, hitY;
-	}
-
-	public void createHitBoxes(Graphics g, int C_ImageID)
-	{
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setPaint(new Color(150, 150, 15));
-
-		RenderingHints rh = new RenderingHints
-		(
-			RenderingHints.KEY_ANTIALIASING,
-		        RenderingHints.VALUE_ANTIALIAS_ON	
-		);
-
-		rh.put(RenderingHints.KEY_RENDERING,
-			RenderingHints.VALUE_RENDER_QUALITY
-		);
-
-		g2d.setRenderingHints(rh);
-
 		switch(C_ImageID)
 		{
 			case 0:
-				int cheight = h;
+				int[] mouseAvail = new int[4]; //set available positions
+				boolean broken = false;
+
+				mouseAvail[0] = h;
 				for (int i = 0; i <= 3; i++)
 				{
-					g2d.fillRect(w, cheight, width, height);
-					cheight += 30;
+					if (i > 0)
+						mouseAvail[i] = mouseAvail[i - 1] + height + sep;
+					if (e.getX() >= w && e.getX() <= w + width && e.getY() >= mouseAvail[i] && e.getY() <= mouseAvail[i] + height)
+					{
+						if (oSelected != 2)
+							oSelected += 1;
+						areturn = 1;
+						broken = true;
+						break;
+					}
+					else if (e.getY() < mouseAvail[i])
+						break;
 				}
-		}	
-	}
 
-	public int[] mousePointer(MouseEvent e, int C_ImageID)
-	{
-		int areturn[2]; //array to return
-
-		areturn[0] = C_ImageID;
-		switch(C_ImageID)
-		{
-			case 0:
-				int[] mouseAvail[4]; //set available positions
-
-				boolean returned = false; //check if it is inside of a hitbox
-				for (int i = 0; i<= 3; i++)
-				{
-					mouseAvail[i] = h + (30 * i);
-					if (e.getX() >= w && e.getX() <= width && e.getY() >= mouseAvail[i] && e.getY() <= mouseAvail[i] + 30);
-				}
+				if (!broken)
+					oSelected = 0;
+				break;
+			default:
+				break;
 		}
+
+		if (oSelected == 1)
+			return areturn;
+		else
+			return 0;
 	}
 }
